@@ -28,9 +28,12 @@
 #
 # When the keydir argument is set to an empty string, the "encrypted" value is returned and keyczar is
 # not invoked. Use this when using ansible-vault or when not using encryption.
-# This function is vompatible with both python2 and python3. When using keyczar the python keyzar module is required:
+# This function is compatible with both python2 and python3. When using keyczar the python keyzar module is required:
 # - for python2 install python-keyczar
 # - for python3 install python3-keyczar
+#
+# Note that the keyczar library is deprecated and abandoned. See: https://github.com/google/keyczar
+
 def vault(encrypted, keydir):
 
   if not keydir:
@@ -62,6 +65,7 @@ sys.stdout.write(crypter.Decrypt("%s"))
 # Calculate hex encoded sha256 checksum of "data"
 #
 # Compatible with python2 and python3
+
 def sha256s(data):
   import hashlib
   return hashlib.sha256(data.encode('utf-8')).hexdigest()
@@ -77,6 +81,7 @@ def sha256s(data):
 # in SAML Metadata
 #
 # Compatible with python2 and python3
+
 def depem(string):
   import re
   return re.sub(r'\s+|(-----(BEGIN|END).*-----)', '', string)
